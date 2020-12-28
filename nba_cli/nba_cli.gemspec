@@ -2,7 +2,7 @@ require_relative 'lib/nba_cli/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "nba_cli"
-  spec.version       = NbaCli::VERSION
+  spec.version       = NbaCLI::VERSION
   spec.authors       = ["Romano Livi"]
   spec.email         = ["romano_livi@outlook.com"]
 

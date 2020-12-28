@@ -1,6 +1,6 @@
-#!usr/bin/env ruby
+#!/usr/bin/env ruby
 
 require "bundler/setup"
-require "nbaCLI"
+require "nba_cli"
 
 NbaCLI::CLI.new.start
