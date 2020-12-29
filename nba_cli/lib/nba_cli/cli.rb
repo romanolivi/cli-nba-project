@@ -8,7 +8,7 @@ class NbaCLI::CLI
         choose_team
     end
 
-    def choose_team 
+    def choose_team(input)
         puts "Select a team you're interested in learning about!"
         input = gets.chomp()
         if !NbaCLI::Scraper.team_scrape.include?(input)
@@ -19,8 +19,10 @@ class NbaCLI::CLI
         sleep 2
         puts "Loading team data...."
         sleep 2
-        puts "#{input}!"
-    end
+        puts "Loading #{input} roster..."
+        
+    end 
+
 
 end
 

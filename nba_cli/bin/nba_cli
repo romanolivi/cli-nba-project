@@ -3,8 +3,8 @@
 require "bundler/setup"
 require "nba_cli"
 
-NbaCLI::CLI.new.start
+#NbaCLI::CLI.new.start
 
-#NbaCLI::Scraper.new.team_scrape
+NbaCLI::Scraper.roster_link
 
 #NbaCLI::Team.all
