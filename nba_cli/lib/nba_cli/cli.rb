@@ -25,7 +25,16 @@ class NbaCLI::CLI
     end
     
     def team_list 
-        NbaCLI::Scraper.new.display_teams
+        puts "Would you like to select a team, or go back to the main menu?"
+        puts "1) Select team"
+        puts "2) Go back"
+        input_2 = gets.chomp()
+        if input_2 == "1"
+            NbaCLI::Scraper.new.display_teams
+            team_search
+        elsif input_2 == "2"
+            start
+        end
     end
 
     def team_search
@@ -42,8 +51,37 @@ class NbaCLI::CLI
             puts "Invalid. Try again"
             team_search
         end
+        player_q(input)
     end
 
+    def player_q(team_name)
+        puts "Choose a player from #{team_name} you want to learn more about: "
+        player_input = gets.chomp()
+        NbaCLI::Players.find_player(player_input)
+        
+
+        puts "1) Select another player"
+        puts "2) Choose another team"
+        puts "3) Go back to Main Menu"
+        puts "4) Exit the program"
+
+        q_input = gets.chomp()
+
+        case q_input
+            when "1"
+                player_q
+            when "2"
+                NbaCLI::Players.all.clear
+                team_search
+            when "3"
+                NbaCLI::Players.all.clear
+                start
+            when "4"
+                puts "Goodbye"
+        end
+    end
+
+    
 
 end  
     
