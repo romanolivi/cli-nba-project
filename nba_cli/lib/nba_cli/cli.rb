@@ -72,7 +72,7 @@ class NbaCLI::CLI
 
             NbaCLI::Players.find_player(player_name, team_name)
             
-            puts "1) Select another player"
+            puts "1) Select another player/Play Game"
             puts "2) Choose another team"
             puts "3) Go back to Main Menu"
             puts "4) Exit the program"
@@ -89,7 +89,7 @@ class NbaCLI::CLI
                     NbaCLI::Players.all.clear
                     start
                 when "4"
-                    puts "Goodbye"
+                    puts "Thank you, Goodbye!"
             end
     
         

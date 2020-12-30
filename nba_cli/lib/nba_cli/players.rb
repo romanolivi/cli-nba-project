@@ -42,20 +42,12 @@ class NbaCLI::Players
     end
 
     def self.play_game
-        num = rand(0..@@all.length - 1)
-        player = @@all[num]
-        puts "Is #{player.name}'s salary greater than $5,000,000?"
-        answer = gets.chomp()
-        salary = player.salary.delete("$,").to_i
-            if salary > 5000000 && answer == "yes"
-                puts "Correct!"
-            elsif salary > 5000000 && answer == "no"
-                puts "Incorrect!"
-            elsif salary < 5000000 && answer == "yes"
-                puts "Incorrect!"
-            elsif salary < 5000000 && answer == "no"
-                puts "Correct!"
-            end
+        game_num = rand(1..2)
+        if game_num == 1 
+            self.salary_game
+        elsif game_num == 2
+            self.college_game
+        end
 
         puts "Want to go again?"
         puts "1) Yes"
@@ -79,6 +71,38 @@ class NbaCLI::Players
                 puts "Invalid response. Closing program."
             end
 
+    end
+
+    def self.salary_game 
+        num = rand(0..@@all.length - 1)
+        player = @@all[num]
+        puts "Is #{player.name}'s salary greater than $5,000,000?"
+        answer = gets.chomp()
+        salary = player.salary.delete("$,").to_i
+            if salary > 5000000 && answer == "yes"
+                puts "Correct!"
+            elsif salary > 5000000 && answer == "no"
+                puts "Incorrect!"
+            elsif salary < 5000000 && answer == "yes"
+                puts "Incorrect!"
+            elsif salary < 5000000 && answer == "no"
+                puts "Correct!"
+            end
+    end
+
+    def self.college_game
+        num = rand(0..@@all.length - 1)
+        player = @@all[num]
+        puts "What college did #{player.name} go to?"
+        answer = gets.chomp()
+        college = player.college
+            if answer == college
+                puts "Correct!"
+                puts "#{player.name} attended #{college}!"
+            else
+                puts "Incorrect!"
+                puts "#{player.name} attended #{college}!"
+            end
     end
 
 
