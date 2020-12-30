@@ -9,7 +9,6 @@ class NbaCLI::CLI
         puts "Welcome to the NBA App! What would you like to do"
         puts "1) See full list of teams"
         puts "2) Search for a team"
-        puts "3) Search for a player"
         input = gets.chomp()
         if input == "1"
             team_list
@@ -55,34 +54,39 @@ class NbaCLI::CLI
     end
 
     def player_q(team_name)
-        puts "Choose a player from #{team_name} you want to learn more about: "
+        puts "1) Choose a player from #{team_name} you want to learn more about"
+        puts "2) Play a game"
         player_input = gets.chomp()
+        if player_input == "1"
         NbaCLI::Players.find_player(player_input)
         
 
-        puts "1) Select another player"
-        puts "2) Choose another team"
-        puts "3) Go back to Main Menu"
-        puts "4) Exit the program"
+            puts "1) Select another player"
+            puts "2) Choose another team"
+            puts "3) Go back to Main Menu"
+            puts "4) Exit the program"
 
-        q_input = gets.chomp()
+            q_input = gets.chomp()
 
-        case q_input
-            when "1"
-                player_q
-            when "2"
-                NbaCLI::Players.all.clear
-                team_search
-            when "3"
-                NbaCLI::Players.all.clear
-                start
-            when "4"
-                puts "Goodbye"
+            
+             case q_input
+                when "1"
+                    player_q
+                when "2"
+                    NbaCLI::Players.all.clear
+                    team_search
+                when "3"
+                    NbaCLI::Players.all.clear
+                    start
+                when "4"
+                    puts "Goodbye"
+            end
+    
+        
+        elsif player_input == "2"
+            NbaCLI::Players.play_game
         end
     end
-
-    
-
 end  
     
     

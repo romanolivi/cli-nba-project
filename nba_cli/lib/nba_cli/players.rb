@@ -39,5 +39,44 @@ class NbaCLI::Players
         end
     end
 
+    def self.play_game
+        num = rand(0..@@all.length - 1)
+        player = @@all[num]
+        puts "Is #{player.name}'s salary greater than $5,000,000?"
+        answer = gets.chomp()
+        salary = player.salary.delete("$,").to_i
+            if salary > 5000000 && answer == "yes"
+                puts "Correct!"
+            elsif salary > 5000000 && answer == "no"
+                puts "Incorrect!"
+            elsif salary < 5000000 && answer == "yes"
+                puts "Incorrect!"
+            elsif salary < 5000000 && answer == "no"
+                puts "Correct!"
+            end
+
+        puts "Want to go again?"
+        puts "1) Yes"
+        puts "2) No"
+        answer_2 = gets.chomp()
+            if answer_2 == "1"
+                self.play_game
+            elsif answer_2 == "2"
+                puts "1) Main Menu"
+                puts "2) Exit"
+                answer_3 = gets.chomp()
+                if answer_3 == "1"
+                    start
+                elsif answer_3 == "2"
+                    puts "Thank you, Goodbye!"
+                else 
+                    puts "Invalid response. Closing program."
+                end
+            else 
+                puts "Invalid response. Closing program."
+            end
+
+    end
+
 
 end
