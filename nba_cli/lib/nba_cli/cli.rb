@@ -6,16 +6,16 @@ class NbaCLI::CLI
         puts "Loading Application. Please wait...."
         @@team_url_hash_counter == 0 ? NbaCLI::Scraper.new.team_url_hash : nil 
         @@team_url_hash_counter += 1
-        puts "Welcome to the NBA App! What would you like to do"
+        puts "Welcome to the NBA App! What would you like to do?"
+        puts ""
         puts "1) See full list of teams"
         puts "2) Search for a team"
         input = gets.chomp()
         if input == "1"
+            puts ""
             team_list
         elsif input == "2"
             team_search
-        elsif input == "3"
-            player_search
         else
             puts "Invalid response. Try again"
             start
@@ -24,19 +24,24 @@ class NbaCLI::CLI
     end
     
     def team_list 
+        space
         puts "Would you like to select a team, or go back to the main menu?"
+        space
         puts "1) Select team"
         puts "2) Go back"
         input_2 = gets.chomp()
         if input_2 == "1"
             NbaCLI::Scraper.new.display_teams
+            puts ""
             team_search
         elsif input_2 == "2"
+            puts ""
             start
         end
     end
 
     def team_search
+        puts ""
         puts "Type in team name: "
         input = gets.chomp()
         url = ""
@@ -54,13 +59,19 @@ class NbaCLI::CLI
     end
 
     def player_q(team_name)
+        puts ""
         puts "1) Choose a player from #{team_name} you want to learn more about"
         puts "2) Play a game"
         player_input = gets.chomp()
-        if player_input == "1"
-        NbaCLI::Players.find_player(player_input)
-        
 
+        if player_input == "1"
+
+            puts "Input player name to learn more: "
+
+            player_name = gets.chomp()
+
+            NbaCLI::Players.find_player(player_name, team_name)
+            
             puts "1) Select another player"
             puts "2) Choose another team"
             puts "3) Go back to Main Menu"
@@ -68,10 +79,9 @@ class NbaCLI::CLI
 
             q_input = gets.chomp()
 
-            
-             case q_input
+            case q_input
                 when "1"
-                    player_q
+                    player_q(team_name)
                 when "2"
                     NbaCLI::Players.all.clear
                     team_search
@@ -86,6 +96,12 @@ class NbaCLI::CLI
         elsif player_input == "2"
             NbaCLI::Players.play_game
         end
+    end
+
+    def space 
+        puts ""
+        puts "==============="
+        puts ""
     end
 end  
     
@@ -157,35 +173,6 @@ end
     
     
     
-        #     puts "Welcome to the NBA App Miami Heat Edition! What would you like to do?\n1) Learn more about the team\n2) Learn more about the players" 
-    #     input = gets.chomp()
-    #     if input == "1"
-    #         team_info
-    #     elsif input == "2"
-    #         puts "You will be taken to the roster page. Do you want to continue?"
-    #         input_2 = gets.chomp()
-    #         if input_2 == "yes" 
-    #             roster
-    #         elsif input_2 == "no"
-    #             start
-    #         end 
-    #     else 
-    #         puts "Invalid input! Try again!"
-    #         start
-    #     end
-    # end
-
-    # def team_info
-        
-    # end
-
-    # def roster 
-    #     puts "Loading Miami Heat roster..."
-    #     sleep 3
-    #     NbaCLI::Scraper.new.scrape_roster.each_with_index do |player, i|
-    #         puts "#{i+1}. #{player}"
-    #     end 
-    # end
 
     
 
