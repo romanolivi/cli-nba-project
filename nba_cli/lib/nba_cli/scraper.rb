@@ -1,5 +1,5 @@
 class NbaCLI::Scraper
-    # Player link = link.css("table.Table").css("tbody.Table__TBODY")[0].children[0].children[1].text
+    # Player link = link.css("table.Table").css("tbody.Table__TBODY")[0].children[0].children[1].text.gsub!(/\d+/,"")
     # Position link = link.css("table.Table").css("tbody.Table__TBODY")[0].children[0].children[2].text
     # Age link = link.css("table.Table").css("tbody.Table__TBODY")[0].children[0].children[3].text
     # Height link = link.css("table.Table").css("tbody.Table__TBODY")[0].children[0].children[4].text
@@ -41,9 +41,26 @@ class NbaCLI::Scraper
     end
 
     def scrape_players(url)
-        
+        roster_url = Nokogiri::HTML(open("https://www.espn.com" + url))
+        p = roster_url.css("table.Table").css("tbody.Table__TBODY")[0]
+        length = roster_url.css("table.Table").css("tbody.Table__TBODY")[0].children.length
+        i = 0
+        while(length > 0)
+            NbaCLI::Players.new(
+                p.children[i].children[1].text.gsub!(/\d+/,""), 
+                p.children[i].children[2].text, 
+                p.children[i].children[3].text, 
+                p.children[i].children[4].text, 
+                p.children[i].children[5].text, 
+                p.children[i].children[6].text, 
+                p.children[i].children[7].text)
+            length -= 1
+            i += 1
+        end
+        NbaCLI::Players.display_players
+    end
 
-    
+
     # def display_team_hash 
     #     team_url_hash.each do |team, url|
     #        puts "#{team}: #{url}"

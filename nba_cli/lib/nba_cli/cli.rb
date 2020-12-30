@@ -37,7 +37,7 @@ class NbaCLI::CLI
         end
 
         if url 
-            NbaCLI::CLI.Scraper.new.scrape_players(url) 
+            NbaCLI::Scraper.new.scrape_players(url) 
         else 
             puts "Invalid. Try again"
             team_search
