@@ -9,45 +9,100 @@ class NbaCLI::Scraper
 
     # link = doc.css("div.TeamLinks__Links")[0].children[2].children[0].attributes["href"].value
     
-    @@teams = []
-
-    def teams 
-        @@teams
-    end
+    @@team_hash = {}
 
     def get_page
-        doc = Nokogiri::HTML(open("https://www.espn.com/nba/teams"))
+        Nokogiri::HTML(open("https://www.espn.com/nba/teams"))
     end
 
-    def self.team_scrape
-        page = Nokogiri::HTML(open("https://www.espn.com/nba/teams"))
-        team_list = page.css("h2")
-            team_list.each do |t|
-                name = t.text
-                ref = t.text.gsub(" ", "-").downcase
-                @@teams << name 
-            end
-        @@teams 
-    end
-
-    def self.roster_link
-        puts "Select a team you're interested in learning about!"
-        input = gets.chomp()
-        if !NbaCLI::Scraper.team_scrape.include?(input)
-            puts "Invalid input, Try again!"
-            self.roster_link
-        else
-            puts "You selected the #{input}!"
-            sleep 2
-            puts "Loading team data...."
-            sleep 2
-            puts "Loading #{input} roster..."
+    def team_scrape
+        team_array = [] 
+        get_page.css("div.pl3 h2").each do |team|
+            team_array << team.text
         end
-        
-        doc = Nokogiri::HTML(open(https://www.espn.com/nba/team/roster/_/name))
+        team_array
     end
 
-    #     link = Nokogiri::HTML(open("https://www.espn.com" + doc.css("div.TeamLinks__Links")[0].children[2].children[0].attributes["href"].value))
+    def display_teams
+        team_scrape.each_with_index do |team, i|
+        puts "#{i+1}. #{team}"
+        end
+    end
 
+    def team_url_hash
+        get_page.css("div.pl3 h2").each_with_index do |team, i|
+            @@team_hash[team.text] = get_page.css("div.TeamLinks__Links")[i].children[2].children[0].attributes["href"].value
+        end
+        @@team_hash
+    end
 
+    def team_hash
+        @@team_hash
+    end
+
+    def scrape_players(url)
+        
+
+    
+    # def display_team_hash 
+    #     team_url_hash.each do |team, url|
+    #        puts "#{team}: #{url}"
+    #     end
+    # end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def scrape_team_info
+#     url = "https://www.landofbasketball.com/teams/miami_heat.htm"
+#     doc = Nokogiri::HTML(open(url))
+
+#     retired_jersey = []
+    
+# end
+
+
+# def scrape_roster
+#     url = "https://www.landofbasketball.com/teams/miami_heat.htm"
+#     doc = Nokogiri::HTML(open(url))
+
+#     roster = []
+#     i = 0
+#     until roster.length == 14
+#         roster << doc.css("td a").children[i].text
+#         i += 1
+#     end
+#     roster
+# end
+
+# def player_info
+#     student_links = []
+#     NbaCLI::Scraper.new.scrape_roster.each do |player|
+#         name = player.gsub(" ", "_").downcase
+#         url = "https://www.landofbasketball.com/nba_players/#{name}.htm"
+#         student_links << url 
+#     end
+#         url
+#         binding.pry
+# end
+#   doc.css("td a").children[0].text    
