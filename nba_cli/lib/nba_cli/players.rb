@@ -96,7 +96,7 @@ class NbaCLI::Players
         puts "What college did #{player.name} go to?"
         answer = gets.chomp()
         college = player.college
-            if answer == college
+            if answer.downcase == college.downcase
                 puts "Correct!"
                 puts "#{player.name} attended #{college}!"
             else
