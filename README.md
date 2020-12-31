@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # NbaCli
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nba_cli`. To experiment with that code, run `bin/console` for an interactive prompt.
@@ -42,3 +43,15 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the NbaCli project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/nba_cli/blob/master/CODE_OF_CONDUCT.md).
+=======
+# cli-nba-project
+CLI application that will provide in-depth information on current NBA players and teams. With this app, you will be able to select and learn more about your favorite NBA teams and players, and even play some fun games based on current player information. 
+
+# Installation Instructions
+To install the program, add this line of code to your applications gemfile:
+`gem 'nba_cli'`
+and then in your terminal, execute:
+`$ bundle install`
+as a final option, you can install it yourself like this: 
+`$ gem install nba_cli`
+>>>>>>> 90143272f1bec9cc59bbd9969a5a5c24f8ce7408
