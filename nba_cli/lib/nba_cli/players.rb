@@ -50,12 +50,10 @@ class NbaCLI::Players
         end
 
         puts "Want to go again?"
-        puts "1) Yes"
-        puts "2) No"
         answer_2 = gets.chomp()
-            if answer_2 == "1"
+            if answer_2.downcase == "yes".downcase
                 self.play_game
-            elsif answer_2 == "2"
+            elsif answer_2.downcase == "no".downcase
                 puts "1) Main Menu"
                 puts "2) Exit"
                 answer_3 = gets.chomp()
@@ -79,13 +77,13 @@ class NbaCLI::Players
         puts "Is #{player.name}'s salary greater than $5,000,000?"
         answer = gets.chomp()
         salary = player.salary.delete("$,").to_i
-            if salary > 5000000 && answer == "yes"
+            if salary > 5000000 && answer.downcase == "yes".downcase
                 puts "Correct!"
-            elsif salary > 5000000 && answer == "no"
+            elsif salary > 5000000 && answer.downcase == "no".downcase
                 puts "Incorrect!"
-            elsif salary < 5000000 && answer == "yes"
+            elsif salary < 5000000 && answer.downcase == "yes".downcase
                 puts "Incorrect!"
-            elsif salary < 5000000 && answer == "no"
+            elsif salary < 5000000 && answer.downcase == "no".downcase
                 puts "Correct!"
             end
     end

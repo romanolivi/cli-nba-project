@@ -60,11 +60,5 @@ class NbaCLI::Scraper
         NbaCLI::Players.display_players
     end
 
-
-    # def display_team_hash 
-    #     team_url_hash.each do |team, url|
-    #        puts "#{team}: #{url}"
-    #     end
-    # end
 end
 

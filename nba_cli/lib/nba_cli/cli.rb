@@ -37,25 +37,28 @@ class NbaCLI::CLI
         elsif input_2 == "2"
             puts ""
             start
+        else 
+            puts "Invalid input. Try again"
+            team_list
         end
     end
 
     def team_search
         puts ""
         puts "Type in team name: "
-        input = gets.chomp()
+        team_input = gets.chomp()
         url = ""
         NbaCLI::Scraper.new.team_hash.find do |k, v|
-            url = NbaCLI::Scraper.new.team_hash[input]
+            url = NbaCLI::Scraper.new.team_hash[team_input]
         end
 
         if url 
             NbaCLI::Scraper.new.scrape_players(url) 
+            player_q(team_input)
         else 
             puts "Invalid. Try again"
             team_search
         end
-        player_q(input)
     end
 
     def player_q(team_name)
@@ -95,6 +98,9 @@ class NbaCLI::CLI
         
         elsif player_input == "2"
             NbaCLI::Players.play_game
+        else 
+            puts "Invalid input. Try again"
+            player_q(team_name)
         end
     end
 
