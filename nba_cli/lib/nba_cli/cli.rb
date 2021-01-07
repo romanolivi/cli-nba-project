@@ -4,13 +4,14 @@ class NbaCLI::CLI
     
     def start
         puts "Loading Application. Please wait...."
+
         @@team_url_hash_counter == 0 ? NbaCLI::Scraper.new.team_url_hash : nil 
         @@team_url_hash_counter += 1
         puts "Welcome to the NBA App! What would you like to do?"
         puts ""
         puts "1) See full list of teams"
         puts "2) Search for a team"
-        input = gets.chomp()
+        input = gets.chomp
         if input == "1"
             puts ""
             team_list
@@ -22,6 +23,12 @@ class NbaCLI::CLI
         end
 
     end
+
+    def display_teams
+        NbaCLI::Scraper.new.team_scrape.each_with_index do |team, i|
+        puts "#{i+1}. #{team}"
+        end
+    end
     
     def team_list 
         space
@@ -29,9 +36,9 @@ class NbaCLI::CLI
         space
         puts "1) Select team"
         puts "2) Go back"
-        input_2 = gets.chomp()
+        input_2 = gets.chomp
         if input_2 == "1"
-            NbaCLI::Scraper.new.display_teams
+            display_teams
             puts ""
             team_search
         elsif input_2 == "2"
@@ -73,7 +80,7 @@ class NbaCLI::CLI
 
             player_name = gets.chomp()
 
-            NbaCLI::Players.find_player(player_name, team_name)
+            NbaCLI::Player.find_player(player_name, team_name)
             
             puts "1) Select another player/Play Game"
             puts "2) Choose another team"
@@ -86,18 +93,19 @@ class NbaCLI::CLI
                 when "1"
                     player_q(team_name)
                 when "2"
-                    NbaCLI::Players.all.clear
+                    NbaCLI::Player.all.clear
                     team_search
                 when "3"
-                    NbaCLI::Players.all.clear
+                    NbaCLI::Player.all.clear
                     start
                 when "4"
                     puts "Thank you, Goodbye!"
+                    NbaCLI::Player.new.greeting
             end
     
         
         elsif player_input == "2"
-            NbaCLI::Players.play_game
+            NbaCLI::Player.play_game
         else 
             puts "Invalid input. Try again"
             player_q(team_name)

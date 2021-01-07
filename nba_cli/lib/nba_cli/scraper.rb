@@ -1,3 +1,4 @@
+require 'pry'
 class NbaCLI::Scraper
     # Player link = link.css("table.Table").css("tbody.Table__TBODY")[0].children[0].children[1].text.gsub!(/\d+/,"")
     # Position link = link.css("table.Table").css("tbody.Table__TBODY")[0].children[0].children[2].text
@@ -8,7 +9,7 @@ class NbaCLI::Scraper
     # salary link = link.css("table.Table").css("tbody.Table__TBODY")[0].children[0].children[7].text
 
     # link = doc.css("div.TeamLinks__Links")[0].children[2].children[0].attributes["href"].value
-    
+
     @@team_hash = {}
 
     def get_page
@@ -21,12 +22,6 @@ class NbaCLI::Scraper
             team_array << team.text
         end
         team_array
-    end
-
-    def display_teams
-        team_scrape.each_with_index do |team, i|
-        puts "#{i+1}. #{team}"
-        end
     end
 
     def team_url_hash
@@ -46,7 +41,7 @@ class NbaCLI::Scraper
         length = roster_url.css("table.Table").css("tbody.Table__TBODY")[0].children.length
         i = 0
         while(length > 0)
-            NbaCLI::Players.new(
+            NbaCLI::Player.new(
                 p.children[i].children[1].text.gsub!(/\d+/,""), 
                 p.children[i].children[2].text, 
                 p.children[i].children[3].text, 
@@ -57,7 +52,7 @@ class NbaCLI::Scraper
             length -= 1
             i += 1
         end
-        NbaCLI::Players.display_players
+        NbaCLI::Player.display_players
     end
 
 end

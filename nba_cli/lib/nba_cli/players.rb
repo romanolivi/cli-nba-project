@@ -1,4 +1,4 @@
-class NbaCLI::Players
+class NbaCLI::Player
     attr_accessor :name, :position, :age, :height, :weight, :college, :salary  
     @@all = [] 
     
@@ -69,6 +69,15 @@ class NbaCLI::Players
                 puts "Invalid response. Closing program."
             end
 
+    end
+
+    def greeting
+        @@all.each do |player| 
+            player.name
+        end
+        @@all.map do |player| 
+            player.name
+        end
     end
 
     def self.salary_game 
