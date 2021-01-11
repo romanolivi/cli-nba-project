@@ -18,7 +18,7 @@ class NbaCLI::Player
     end
 
     def self.display_players
-        @@all.each_with_index do |player, i|
+        @@all.sort_by {|player| player.name}.each_with_index do |player, i|
             puts "#{i+1}. #{player.name}"
         end
     end
@@ -70,15 +70,16 @@ class NbaCLI::Player
             end
 
     end
-
-    def greeting
-        @@all.each do |player| 
-            player.name
-        end
-        @@all.map do |player| 
-            player.name
-        end
-    end
+    
+    # def greeting
+    #    fruits = "apple"
+    #    if fruit == "apple"
+    #     "Hello apple"
+    #    else 
+    #     "Hello Orange"
+    #    end
+    #    "Hello pear"
+    # end
 
     def self.salary_game 
         num = rand(0..@@all.length - 1)

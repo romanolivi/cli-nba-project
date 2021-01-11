@@ -21,7 +21,7 @@ class NbaCLI::Scraper
         get_page.css("div.pl3 h2").each do |team|
             team_array << team.text
         end
-        team_array
+        team_array.sort
     end
 
     def team_url_hash
