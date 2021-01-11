@@ -71,15 +71,6 @@ class NbaCLI::Player
 
     end
     
-    # def greeting
-    #    fruits = "apple"
-    #    if fruit == "apple"
-    #     "Hello apple"
-    #    else 
-    #     "Hello Orange"
-    #    end
-    #    "Hello pear"
-    # end
 
     def self.salary_game 
         num = rand(0..@@all.length - 1)

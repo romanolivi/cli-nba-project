@@ -5,7 +5,4 @@ require "nba_cli"
 
 NbaCLI::CLI.new.start
 
-#NbaCLI::Scraper.new.scrape_players(url)
-
-#NbaCLI::Team.all
 
